@@ -26,6 +26,7 @@ describe('BigInteger', function () {
     expect(ONE.isOne()).to.equal(true)
     expect(BigInteger.from([0, 0, 0, 0, 0, 0, 0, 0, 1, 0]).isOne()).to.equal(false)
     expect(BigInteger.from([1, 2, 3, 0xF4, 5, 6, 7, 8, 9]).isOne()).to.equal(false)
+    expect(BigInteger.from([0, 0, 0, 0, 1, 1]).isOne()).to.equal(false)
   })
 
   it('add', function () {

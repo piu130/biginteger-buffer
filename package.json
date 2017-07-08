@@ -5,7 +5,7 @@
   "main": "BigInteger.js",
   "scripts": {
     "lint": "eslint *.js",
-    "test": "mocha BigInteger_test.js"
+    "test": "mocha *_test.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/piu130/biginteger-buffer#readme",
   "devDependencies": {
     "chai": "^4.0.2",
+    "codecov": "^2.2.0",
     "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",

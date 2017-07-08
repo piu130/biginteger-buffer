@@ -5,7 +5,8 @@
   "main": "BigInteger.js",
   "scripts": {
     "lint": "eslint *.js",
-    "test": "mocha *_test.js"
+    "test": "mocha *_test.js",
+    "codecov": "codecov"
   },
   "repository": {
     "type": "git",

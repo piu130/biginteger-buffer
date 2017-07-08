@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint *.js",
     "test": "mocha *_test.js",
-    "codecov": "codecov"
+    "codecov": "istanbul cover ./node_modules/mocha/bin/_mocha -- *_test.js && codecov"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "eslint-plugin-node": "^5.1.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.4.2"
   }
 }

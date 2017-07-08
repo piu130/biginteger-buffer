@@ -1,0 +1,30 @@
+{
+  "name": "biginteger-buffer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "BigInteger.js",
+  "scripts": {
+    "lint": "eslint *.js",
+    "test": "mocha BigInteger_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piu130/biginteger-buffer.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/piu130/biginteger-buffer/issues"
+  },
+  "homepage": "https://github.com/piu130/biginteger-buffer#readme",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.4.2"
+  }
+}

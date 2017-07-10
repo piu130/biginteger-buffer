@@ -17,12 +17,30 @@ module.exports = class BigInteger {
   }
 
   /**
+   * Returns the biggest number in the array.
+   * @param {Array<BigInteger>} bigIntegers
+   * @returns {BigInteger}
+   */
+  static max (bigIntegers) {
+    return bigIntegers.reduce((acc, curr) => curr.smaller(acc) ? acc : curr)
+  }
+
+  /**
+   * Returns the smallest number in the array.
+   * @param {Array<BigInteger>} bigIntegers
+   * @returns {BigInteger}
+   */
+  static min (bigIntegers) {
+    return bigIntegers.reduce((acc, curr) => curr.greater(acc) ? acc : curr)
+  }
+
+  /**
    * Trims leading zeros
    * @private
    */
   _trim () {
     let i = 0
-    while (this.buffer[i++] === 0);
+    while (this.buffer[i++] === 0) {}
     this.buffer = this.buffer.slice(i === this.buffer.length + 1 ? i - 2 : i - 1)
   }
 

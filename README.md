@@ -39,6 +39,14 @@ const zero = BigInteger.from([0x00])
 const number = BigInteger.from(Buffer.from([0xFF, 0xAB, 0x01]))
 ```
 
+#### `BigInteger.max(bigIntegers)`
+
+Returns the biggest number in the array.
+
+#### `BigInteger.min(bigIntegers)`
+
+Returns the smallest number in the array.
+
 ### Instance variables
 
 #### `buffer`

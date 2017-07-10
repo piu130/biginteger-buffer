@@ -125,4 +125,16 @@ describe('BigInteger', function () {
     expect(BIG_NUM_2.smallerOrEqual(BIG_NUM_1)).to.equal(true)
     expect(BIG_NUM_1.smallerOrEqual(BIG_NUM_2)).to.equal(false)
   })
+
+  it('max', function () {
+    expect(BigInteger.max([ZERO])).to.deep.equal(ZERO)
+    expect(BigInteger.max([ZERO, BIG_NUM_2, BIG_NUM_1])).to.deep.equal(BIG_NUM_1)
+    expect(BigInteger.max([BIG_NUM_1, BIG_NUM_2])).to.deep.equal(BIG_NUM_1)
+  })
+
+  it('min', function () {
+    expect(BigInteger.min([ZERO])).to.deep.equal(ZERO)
+    expect(BigInteger.min([ZERO, BIG_NUM_2, BIG_NUM_1])).to.deep.equal(ZERO)
+    expect(BigInteger.min([BIG_NUM_1, BIG_NUM_2])).to.deep.equal(BIG_NUM_2)
+  })
 })

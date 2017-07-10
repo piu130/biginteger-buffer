@@ -77,10 +77,18 @@ module.exports = class BigInteger {
     return this.length === 1 && this.buffer[0] === 1
   }
 
+  /**
+   * Checks if the BigInteger is even
+   * @return {boolean}
+   */
   isEven () {
     return this.buffer[this._lastIndex] % 2 === 0
   }
 
+  /**
+   * Checks if the BigInteger is odd
+   * @return {boolean}
+   */
   isOdd () {
     return this.buffer[this._lastIndex] % 2 === 1
   }

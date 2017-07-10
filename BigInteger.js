@@ -37,8 +37,9 @@ module.exports = class BigInteger {
   /**
    * Returns the last index of the buffer (length -1)
    * @returns {Number}
+   * @private
    */
-  get lastIndex () {
+  get _lastIndex () {
     return this.length - 1
   }
 
@@ -59,13 +60,13 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Binary and operation
+   * Bitwise and operation
    * @param {BigInteger} bigInteger
    * @returns {BigInteger}
    */
   and (bigInteger) {
-    let thisPos = this.lastIndex
-    let bigIntegerPos = bigInteger.lastIndex
+    let thisPos = this._lastIndex
+    let bigIntegerPos = bigInteger._lastIndex
     const result = Buffer.alloc(Math.min(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] & bigInteger.buffer[bigIntegerPos--]
@@ -73,13 +74,13 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Binary or operation
+   * Bitwise or operation
    * @param {BigInteger} bigInteger
    * @returns {BigInteger}
    */
   or (bigInteger) {
-    let thisPos = this.lastIndex
-    let bigIntegerPos = bigInteger.lastIndex
+    let thisPos = this._lastIndex
+    let bigIntegerPos = bigInteger._lastIndex
     const result = Buffer.alloc(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] | bigInteger.buffer[bigIntegerPos--]
@@ -87,13 +88,13 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Binary xor operation
+   * Bitwise xor operation
    * @param {BigInteger} bigInteger
    * @returns {BigInteger}
    */
   xor (bigInteger) {
-    let thisPos = this.lastIndex
-    let bigIntegerPos = bigInteger.lastIndex
+    let thisPos = this._lastIndex
+    let bigIntegerPos = bigInteger._lastIndex
     const result = Buffer.alloc(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] ^ bigInteger.buffer[bigIntegerPos--]
@@ -101,7 +102,7 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Binary not operation
+   * Bitwise not operation
    * @returns {BigInteger}
    */
   not () {
@@ -125,8 +126,8 @@ module.exports = class BigInteger {
     }
     const result = Buffer.alloc(bigger.length + 1)
 
-    let biggerPos = bigger.lastIndex
-    let smallerPos = smaller.lastIndex
+    let biggerPos = bigger._lastIndex
+    let smallerPos = smaller._lastIndex
     let carry = 0
 
     while (smallerPos >= 0) {
@@ -142,7 +143,7 @@ module.exports = class BigInteger {
   /**
    * Compares two BigInteger.
    * @param {BigInteger} target
-   * @returns {Number} 0 if target is the same. 1 if target is greater. -1 if target is smaller.
+   * @returns {Number} 0 if target is the same, 1 if target is greater and -1 if target is smaller than this.
    */
   compare (target) {
     return this.buffer.compare(target.buffer)

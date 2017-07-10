@@ -168,13 +168,11 @@ module.exports = class BigInteger {
     let smallerPos = smaller._lastIndex
     let carry = 0
 
-    while (smallerPos >= 0) {
-      const currentResult = bigger.buffer[biggerPos--] + smaller.buffer[smallerPos--] + carry
+    while (biggerPos >= -1) {
+      const currentResult = (bigger.buffer[biggerPos--] || 0) + (smaller.buffer[smallerPos--] || 0) + carry
       carry = (0xFF00 & currentResult) >> 8
       result[biggerPos + 2] = currentResult & 0xFF
     }
-    while (biggerPos >= 0) result[biggerPos + 1] = bigger[biggerPos--]
-
     return BigInteger.from(result)
   }
 

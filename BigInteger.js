@@ -1,6 +1,10 @@
 const Buffer = require('buffer').Buffer
 
 module.exports = class BigInteger {
+  /**
+   * Constructs a new BigInteger
+   * @param {Buffer} value
+   */
   constructor (value) {
     if (!Buffer.isBuffer(value)) throw new Error('Not a Buffer')
     this.buffer = value

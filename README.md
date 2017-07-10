@@ -61,7 +61,11 @@ You can access the length of the number/buffer with `number.length`.
 
 #### `add(bigInteger)`
 
-Performs addition
+Performs addition.
+
+#### `sub(bigInteger)`
+
+Performs subtraction
 
 ### Comparison
 

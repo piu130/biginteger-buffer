@@ -11,6 +11,10 @@ module.exports = class BigInteger {
     this._trim()
   }
 
+  static get BASE () {
+    return 256
+  }
+
   /**
    * Creates a big integer
    * @param {Array|ArrayBuffer|Buffer} value
@@ -173,6 +177,34 @@ module.exports = class BigInteger {
       carry = (0xFF00 & currentResult) >> 8
       result[biggerPos + 2] = currentResult & 0xFF
     }
+    return BigInteger.from(result)
+  }
+
+  /**
+   * Subtraction
+   * @param {BigInteger} bigInteger
+   * @return {BigInteger}
+   */
+  sub (bigInteger) {
+    if (this.smaller(bigInteger)) throw new Error('this is smaller then bigInteger.')
+
+    const result = Buffer.alloc(this.length)
+
+    let biggerPos = this._lastIndex
+    let smallerPos = bigInteger._lastIndex
+    let borrow = 0
+
+    while (biggerPos >= 0) {
+      let currentResult = (this.buffer[biggerPos--] || 0) - (bigInteger.buffer[smallerPos--] || 0) - borrow
+      if (currentResult < 0) {
+        currentResult -= BigInteger.BASE
+        borrow = 1
+      } else {
+        borrow = 0
+      }
+      result[biggerPos + 1] = currentResult
+    }
+
     return BigInteger.from(result)
   }
 

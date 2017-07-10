@@ -29,6 +29,20 @@ describe('BigInteger', function () {
     expect(BigInteger.from([0, 0, 0, 0, 1, 1]).isOne()).to.equal(false)
   })
 
+  it('isEven', function () {
+    expect(ZERO.isEven()).to.equal(true)
+    expect(ONE.isEven()).to.equal(false)
+    expect(BIG_NUM_1.isEven()).to.equal(false)
+    expect(BIG_NUM_2.isEven()).to.equal(true)
+  })
+
+  it('isOdd', function () {
+    expect(ZERO.isOdd()).to.equal(false)
+    expect(ONE.isOdd()).to.equal(true)
+    expect(BIG_NUM_1.isOdd()).to.equal(true)
+    expect(BIG_NUM_2.isOdd()).to.equal(false)
+  })
+
   it('add', function () {
     expect(ZERO.add(ZERO)).to.deep.equal(ZERO)
     expect(ZERO.add(ONE)).to.deep.equal(ONE)

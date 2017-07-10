@@ -59,6 +59,14 @@ module.exports = class BigInteger {
     return this.length === 1 && this.buffer[0] === 1
   }
 
+  isEven () {
+    return this.buffer[this._lastIndex] % 2 === 0
+  }
+
+  isOdd () {
+    return this.buffer[this._lastIndex] % 2 === 1
+  }
+
   /**
    * Bitwise and operation
    * @param {BigInteger} bigInteger

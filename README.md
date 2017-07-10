@@ -69,6 +69,14 @@ Checks if the number is zero.
 
 Checks if the number is one.
 
+#### `isEven()`
+
+Checks if the number is even.
+
+#### `isOdd()`
+
+Checks if the number is odd.
+
 ### Bitwise operations
 
 #### `and(bigInteger)`

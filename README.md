@@ -24,7 +24,7 @@ const BigInteger = require('biginteger-buffer')
 
 ## Usage
 
-Every function returns a new BigInteger object.
+Every function returns a `new BigInteger` object. The big integer is `auto trimmed` (remove leading zeros) after every operation.
 
 ### Class methods
 

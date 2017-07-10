@@ -77,4 +77,52 @@ describe('BigInteger', function () {
     expect(ONE.not()).to.deep.equal(BigInteger.from([0xFE]))
     expect(BIG_NUM_1.not()).to.deep.equal(BigInteger.from([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xEA]))
   })
+
+  it('compare', function () {
+    expect(ZERO.compare(ZERO)).to.equal(0)
+    expect(ONE.compare(ZERO)).to.equal(1)
+    expect(BIG_NUM_1.compare(BIG_NUM_1)).to.equal(0)
+    expect(BIG_NUM_2.compare(BIG_NUM_1)).to.equal(-1)
+    expect(BIG_NUM_1.compare(BIG_NUM_2)).to.equal(1)
+  })
+
+  it('equals', function () {
+    expect(ZERO.equals(ZERO)).to.equal(true)
+    expect(ONE.equals(ZERO)).to.equal(false)
+    expect(BIG_NUM_1.equals(BIG_NUM_1)).to.equal(true)
+    expect(BIG_NUM_2.equals(BIG_NUM_1)).to.equal(false)
+    expect(BIG_NUM_1.equals(BIG_NUM_2)).to.equal(false)
+  })
+
+  it('greater', function () {
+    expect(ZERO.greater(ZERO)).to.equal(false)
+    expect(ONE.greater(ZERO)).to.equal(true)
+    expect(BIG_NUM_1.greater(BIG_NUM_1)).to.equal(false)
+    expect(BIG_NUM_2.greater(BIG_NUM_1)).to.equal(false)
+    expect(BIG_NUM_1.greater(BIG_NUM_2)).to.equal(true)
+  })
+
+  it('greaterOrEqual', function () {
+    expect(ZERO.greaterOrEqual(ZERO)).to.equal(true)
+    expect(ONE.greaterOrEqual(ZERO)).to.equal(true)
+    expect(BIG_NUM_1.greaterOrEqual(BIG_NUM_1)).to.equal(true)
+    expect(BIG_NUM_2.greaterOrEqual(BIG_NUM_1)).to.equal(false)
+    expect(BIG_NUM_1.greaterOrEqual(BIG_NUM_2)).to.equal(true)
+  })
+
+  it('smaller', function () {
+    expect(ZERO.smaller(ZERO)).to.equal(false)
+    expect(ONE.smaller(ZERO)).to.equal(false)
+    expect(BIG_NUM_1.smaller(BIG_NUM_1)).to.equal(false)
+    expect(BIG_NUM_2.smaller(BIG_NUM_1)).to.equal(true)
+    expect(BIG_NUM_1.smaller(BIG_NUM_2)).to.equal(false)
+  })
+
+  it('smallerOrEqual', function () {
+    expect(ZERO.smallerOrEqual(ZERO)).to.equal(true)
+    expect(ONE.smallerOrEqual(ZERO)).to.equal(false)
+    expect(BIG_NUM_1.smallerOrEqual(BIG_NUM_1)).to.equal(true)
+    expect(BIG_NUM_2.smallerOrEqual(BIG_NUM_1)).to.equal(true)
+    expect(BIG_NUM_1.smallerOrEqual(BIG_NUM_2)).to.equal(false)
+  })
 })

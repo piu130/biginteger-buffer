@@ -151,9 +151,56 @@ module.exports = class BigInteger {
   /**
    * Compares two BigInteger.
    * @param {BigInteger} target
-   * @returns {Number} 0 if target is the same, 1 if target is greater and -1 if target is smaller than this.
+   * @returns {Number} 0 if target is the same, -1 if target is greater and 1 if target is smaller than this.
    */
   compare (target) {
     return this.buffer.compare(target.buffer)
+  }
+
+  /**
+   * Checks if this is equal to target.
+   * @param target
+   * @returns {boolean}
+   */
+  equals (target) {
+    return this.compare(target) === 0
+  }
+
+  /**
+   * Checks if this is greater than target.
+   * @param target
+   * @returns {boolean}
+   */
+  greater (target) {
+    return this.compare(target) === 1
+  }
+
+  /**
+   * Checks if this is greater or equal to target.
+   * @param target
+   * @returns {boolean}
+   */
+  greaterOrEqual (target) {
+    const cmp = this.compare(target)
+    return cmp === 0 || cmp === 1
+  }
+
+  /**
+   * Checks if this is smaller than target.
+   * @param target
+   * @returns {boolean}
+   */
+  smaller (target) {
+    return this.compare(target) === -1
+  }
+
+  /**
+   * Checks if this is smaller or equal to target.
+   * @param target
+   * @returns {boolean}
+   */
+  smallerOrEqual (target) {
+    const cmp = this.compare(target)
+    return cmp === 0 || cmp === -1
   }
 }

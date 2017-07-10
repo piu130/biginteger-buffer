@@ -77,6 +77,26 @@ Checks if the number is even.
 
 Checks if the number is odd.
 
+#### `equals(target)`
+
+Checks if this is equal to target.
+
+#### `greater(target)`
+
+Checks if this is greater than target.
+
+#### `greaterOrEqual(target)`
+
+Checks if this is greater or equal to target.
+
+#### `smaller(target)`
+
+Checks if this is smaller than target.
+
+#### `smallerOrEqual(target)`
+
+Checks if this is smaller or equal to target.
+
 ### Bitwise operations
 
 #### `and(bigInteger)`

@@ -47,6 +47,7 @@ describe('BigInteger', function () {
     expect(ZERO.add(ZERO)).to.deep.equal(ZERO)
     expect(ZERO.add(ONE)).to.deep.equal(ONE)
     expect(BIG_NUM_1.add(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
+    expect(BIG_NUM_2.add(BIG_NUM_1)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
   })
 
   it('and', function () {

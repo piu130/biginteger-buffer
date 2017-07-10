@@ -28,7 +28,7 @@ Every function returns a new BigInteger object.
 
 ### Class methods
 
-#### BigInteger.from(array|arrayBuffer|buffer)
+#### `BigInteger.from(array|arrayBuffer|buffer)`
 
 Create a big integer with this function.
 
@@ -41,48 +41,48 @@ const number = BigInteger.from(Buffer.from([0xFF, 0xAB, 0x01]))
 
 ### Instance variables
 
-#### buffer
+#### `buffer`
 
 You can access the buffer with `number.buffer`
 
-#### length
+#### `length`
 
 You can access the length of the number/buffer with `number.length`.
 
 ### Arithmetic operations
 
-#### add(bigInteger)
+#### `add(bigInteger)`
 
 Performs addition
 
 ### Comparison
 
-#### compare(target)
+#### `compare(target)`
 
 Compares two big integers. Returns 0 if target is the same, 1 if target is greater and -1 if target is smaller than `this`.
 
-#### isZero()
+#### `isZero()`
 
 Checks if the number is zero.
 
-#### isOne()
+#### `isOne()`
 
 Checks if the number is one.
 
 ### Bitwise operations
 
-#### and(bigInteger)
+#### `and(bigInteger)`
 
 AND operation.
 
-#### not()
+#### `not()`
 
 NOT operation
 
-#### or(bigInteger)
+#### `or(bigInteger)`
 
 OR operation
 
-#### xor(bigInteger)
+#### `xor(bigInteger)`
 
 XOR operation

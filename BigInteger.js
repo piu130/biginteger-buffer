@@ -186,7 +186,7 @@ module.exports = class BigInteger {
    * @return {BigInteger}
    */
   sub (bigInteger) {
-    if (this.smaller(bigInteger)) throw new Error('this is smaller then bigInteger.')
+    if (this.smaller(bigInteger)) throw new RangeError('this is smaller than bigInteger.')
 
     const result = Buffer.alloc(this.length)
 

@@ -6,7 +6,7 @@ module.exports = class BigInteger {
    * @param {Buffer} value
    */
   constructor (value) {
-    if (!Buffer.isBuffer(value)) throw new Error('Not a Buffer')
+    if (!Buffer.isBuffer(value)) throw new TypeError('Not a Buffer')
     this.buffer = value
     this._trim()
   }

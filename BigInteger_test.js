@@ -50,10 +50,10 @@ describe('BigInteger', function () {
     expect(BIG_NUM_2.add(BIG_NUM_1)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
   })
 
-  it('sub', function () {
-    expect(ZERO.sub(ZERO)).to.deep.equal(ZERO)
-    expect(ONE.sub(ZERO)).to.deep.equal(ONE)
-    expect(BIG_NUM_1.sub(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x7F, 0x85, 0x34, 0xA3, 0xC7, 0x53, 0x92, 0x50, 0x6B]))
+  it('subtract', function () {
+    expect(ZERO.subtract(ZERO)).to.deep.equal(ZERO)
+    expect(ONE.subtract(ZERO)).to.deep.equal(ONE)
+    expect(BIG_NUM_1.subtract(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x7F, 0x85, 0x34, 0xA3, 0xC7, 0x53, 0x92, 0x50, 0x6B]))
   })
 
   it('and', function () {

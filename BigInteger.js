@@ -109,7 +109,7 @@ module.exports = class BigInteger {
   and (bigInteger) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.alloc(Math.min(this.length, bigInteger.length))
+    const result = Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] & bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -123,7 +123,7 @@ module.exports = class BigInteger {
   or (bigInteger) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.alloc(Math.max(this.length, bigInteger.length))
+    const result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] | bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -137,7 +137,7 @@ module.exports = class BigInteger {
   xor (bigInteger) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.alloc(Math.max(this.length, bigInteger.length))
+    const result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] ^ bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -148,7 +148,7 @@ module.exports = class BigInteger {
    * @returns {BigInteger}
    */
   not () {
-    const result = Buffer.alloc(this.length)
+    const result = Buffer.allocUnsafe(this.length)
 
     for (let i = 0; i < result.length; i++) result[i] = ~this.buffer[i]
     return BigInteger.from(result)

@@ -219,7 +219,7 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is equal to target.
-   * @param target
+   * @param {BigInteger} target
    * @returns {boolean}
    */
   equals (target) {
@@ -228,7 +228,7 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is greater than target.
-   * @param target
+   * @param {BigInteger} target
    * @returns {boolean}
    */
   greater (target) {
@@ -237,7 +237,7 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is greater or equal to target.
-   * @param target
+   * @param {BigInteger} target
    * @returns {boolean}
    */
   greaterOrEqual (target) {
@@ -247,7 +247,7 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is smaller than target.
-   * @param target
+   * @param {BigInteger} target
    * @returns {boolean}
    */
   smaller (target) {
@@ -256,7 +256,7 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is smaller or equal to target.
-   * @param target
+   * @param {BigInteger} target
    * @returns {boolean}
    */
   smallerOrEqual (target) {

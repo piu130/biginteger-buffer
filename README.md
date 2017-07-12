@@ -126,3 +126,7 @@ OR operation
 #### `xor(bigInteger)`
 
 XOR operation
+
+## Want to contribute?
+
+Anyone can help make this project better. Please provide tests and document new features.

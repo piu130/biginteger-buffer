@@ -174,7 +174,7 @@ module.exports = class BigInteger {
    * @returns {BigInteger} Result.
    */
   shiftLeft (number) {
-    if (number < 0) throw new RangeError('Use right shift instead of left shift with negative number.')
+    if (number < 0) throw new RangeError('No negative number. Use right shift instead.')
 
     const bits = number & 7
     const bytes = number >> 3
@@ -187,6 +187,27 @@ module.exports = class BigInteger {
       carry = (shifted & 0xFF00) >> 8
     }
     result[0] = carry
+    return BigInteger.from(result)
+  }
+
+  /**
+   * Shift right operation.
+   * @param {number} number - Bits to shift.
+   * @returns {BigInteger} Result.
+   */
+  shiftRight (number) {
+    if (number < 0) throw new RangeError('No negative number. Use left shift instead.')
+
+    const bits = number & 7
+    const bytes = number >> 3
+    const result = Buffer.alloc(this.length - bytes)
+
+    let carry = 0
+    for (let i = 0, j = 0; i < this.length; i++, j++) {
+      const shifted = (this.buffer[i] << 8) >> bits
+      result[j] = carry | ((shifted & 0xFF00) >> 8)
+      carry = shifted & 0xFF
+    }
     return BigInteger.from(result)
   }
 

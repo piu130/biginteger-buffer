@@ -152,6 +152,10 @@ XOR operation
 
 Shift left operation
 
+#### `shiftRight(number)`
+
+Shift right operation
+
 ## Contributing
 
 Anyone can help make this project better. Please provide tests and document new features.

@@ -102,10 +102,21 @@ describe('BigInteger', function () {
   it('shiftLeft', function () {
     expect(ZERO.shiftLeft(5)).to.deep.equal(BigInteger.from([0x00]))
     expect(ONE.shiftLeft(3)).to.deep.equal(BigInteger.from([0x08]))
+    expect(BIG_NUM_1.shiftLeft(0)).to.deep.equal(BIG_NUM_1)
     expect(BIG_NUM_1.shiftLeft(5)).to.deep.equal(BigInteger.from([0x0F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xE2, 0xA0]))
     expect(BIG_NUM_1.shiftLeft(11)).to.deep.equal(BigInteger.from([0x03, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF8, 0xA8, 0x00]))
     expect(BIG_NUM_2.shiftLeft(11)).to.deep.equal(BigInteger.from([0x03, 0xD6, 0x5A, 0xE1, 0xC5, 0x63, 0x6D, 0x75, 0x50, 0x00]))
     expect(BIG_NUM_2.shiftLeft(31)).to.deep.equal(BigInteger.from([0x3D, 0x65, 0xAE, 0x1C, 0x56, 0x36, 0xd7, 0x55, 0x00, 0x00, 0x00, 0x00]))
+  })
+
+  it('shiftRight', function () {
+    expect(ZERO.shiftRight(5)).to.deep.equal(BigInteger.from([0x00]))
+    expect(ONE.shiftRight(3)).to.deep.equal(BigInteger.from([0x00]))
+    expect(BIG_NUM_1.shiftRight(0)).to.deep.equal(BIG_NUM_1)
+    expect(BIG_NUM_1.shiftRight(5)).to.deep.equal(BigInteger.from([0x03, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF8]))
+    expect(BIG_NUM_1.shiftRight(11)).to.deep.equal(BigInteger.from([0x0F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]))
+    expect(BIG_NUM_2.shiftRight(11)).to.deep.equal(BigInteger.from([0x0F, 0x59, 0x6B, 0x87, 0x15, 0x8D, 0xB5]))
+    expect(BIG_NUM_2.shiftRight(31)).to.deep.equal(BigInteger.from([0xF5, 0x96, 0xB8, 0x71]))
   })
 
   it('compare', function () {

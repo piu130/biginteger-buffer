@@ -174,7 +174,7 @@ module.exports = class BigInteger {
    * @returns {BigInteger} Result.
    */
   shiftLeft (number) {
-    if (number < 0) throw new RangeError('No negative number. Use right shift instead.')
+    if (number < 0) this.shiftRight(-number)
 
     const bits = number & 7
     const bytes = number >> 3
@@ -196,7 +196,7 @@ module.exports = class BigInteger {
    * @returns {BigInteger} Result.
    */
   shiftRight (number) {
-    if (number < 0) throw new RangeError('No negative number. Use left shift instead.')
+    if (number < 0) return this.shiftLeft(-number)
 
     const bits = number & 7
     const bytes = number >> 3

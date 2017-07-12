@@ -52,6 +52,10 @@ const zero = BigInteger.from([0x00])
 const number = BigInteger.from(Buffer.from([0xFF, 0xAB, 0x01]))
 ```
 
+#### `BigInteger.random(bitLength)`
+
+Returns a random big integer with the given bit length.
+
 #### `BigInteger.max(bigIntegers)`
 
 Returns the biggest number in the array.

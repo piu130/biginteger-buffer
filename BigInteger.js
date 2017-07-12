@@ -1,4 +1,5 @@
 const Buffer = require('buffer').Buffer
+const crypto = require('crypto')
 
 module.exports = class BigInteger {
   /**
@@ -27,6 +28,19 @@ module.exports = class BigInteger {
    */
   static from (value) {
     return new BigInteger(Buffer.from(value))
+  }
+
+  /**
+   * Generates a random number with the given bit length.
+   * @param {number} bitLength - Bit length of the random number.
+   * @returns {BigInteger} Random big integer.
+   */
+  static random (bitLength) {
+    // Generate random bytes
+    const randomBytes = crypto.randomBytes((bitLength >> 3) + 1)
+    // Mask first bit to fit bit length
+    randomBytes[0] &= (1 << (bitLength & 7)) - 1
+    return new BigInteger(randomBytes)
   }
 
   /**

@@ -16,6 +16,11 @@ describe('BigInteger', function () {
     expect(BigInteger.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])).to.deep.equal(ONE)
   })
 
+  it('random', function () {
+    for (let i = 0; i <= 100; i++) expect(BigInteger.random(9).bitLength).to.be.below(10)
+    for (let i = 0; i <= 100; i++) expect(BigInteger.random(512).bitLength).to.be.below(513)
+  })
+
   it('bit length', function () {
     expect(ZERO.bitLength).to.equal(1)
     expect(ONE.bitLength).to.equal(1)

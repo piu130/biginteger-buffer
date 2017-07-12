@@ -1,6 +1,7 @@
 {
   "extends": [
-    "standard"
+    "standard",
+    "standard-jsdoc"
   ],
   "env": {
     "node" : true,

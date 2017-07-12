@@ -66,6 +66,14 @@ module.exports = class BigInteger {
   }
 
   /**
+   * Returns the bit length of the number.
+   * @returns {number} Bit length.
+   */
+  get bitLength () {
+    return (this._lastIndex << 3) + this.buffer[0].toString(2).length
+  }
+
+  /**
    * Returns the last index of the buffer (length - 1).
    * @returns {number} Last index of the buffer.
    * @private

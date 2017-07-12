@@ -16,6 +16,13 @@ describe('BigInteger', function () {
     expect(BigInteger.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])).to.deep.equal(ONE)
   })
 
+  it('bit length', function () {
+    expect(ZERO.bitLength).to.equal(1)
+    expect(ONE.bitLength).to.equal(1)
+    expect(BIG_NUM_1.bitLength).to.equal(71)
+    expect(BIG_NUM_2.bitLength).to.equal(63)
+  })
+
   it('isZero', function () {
     expect(ZERO.isZero()).to.equal(true)
     expect(ONE.isZero()).to.equal(false)

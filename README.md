@@ -64,11 +64,15 @@ Returns the smallest number in the array.
 
 #### `buffer`
 
-You can access the buffer with `number.buffer`
+Returns the buffer representation of the number.
 
 #### `length`
 
-You can access the length of the number/buffer with `number.length`.
+Returns the length of the number.
+
+#### `bitLength`
+
+Returns the bit length of the number.
 
 ### Arithmetic operations
 

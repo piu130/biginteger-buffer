@@ -215,8 +215,6 @@ module.exports = class BigInteger {
    */
   multiply (bigInteger) {
     if (this.isZero() || bigInteger.isZero()) return BigInteger.from([0])
-    if (this.isOne()) return bigInteger
-    if (bigInteger.isOne()) return this
 
     const result = Buffer.alloc(this.length + bigInteger.length)
     // TODO performance

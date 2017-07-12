@@ -4,7 +4,9 @@ const BigInteger = require('./BigInteger')
 describe('BigInteger', function () {
   const ZERO = BigInteger.from([0])
   const ONE = BigInteger.from([1])
+  // 0x7FFFFFFFFFFFFFFF15
   const BIG_NUM_1 = BigInteger.from([0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x15])
+  // 0x7ACB5C38AC6DAEAA
   const BIG_NUM_2 = BigInteger.from([0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAE, 0xAA])
 
   it('should auto trim', function () {
@@ -54,6 +56,13 @@ describe('BigInteger', function () {
     expect(ZERO.subtract(ZERO)).to.deep.equal(ZERO)
     expect(ONE.subtract(ZERO)).to.deep.equal(ONE)
     expect(BIG_NUM_1.subtract(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x7F, 0x85, 0x34, 0xA3, 0xC7, 0x53, 0x92, 0x50, 0x6B]))
+  })
+
+  it('multiply', function () {
+    expect(ZERO.multiply(ZERO)).to.deep.equal(ZERO)
+    expect(ONE.multiply(ZERO)).to.deep.equal(ZERO)
+    expect(BIG_NUM_1.multiply(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x3D, 0x65, 0xAE, 0x1C, 0x56, 0x36, 0xD7, 0x54, 0x8F, 0x47, 0x52, 0x57, 0xF9, 0xB7, 0x50, 0xA9, 0xF2]))
+    expect(BIG_NUM_2.multiply(BIG_NUM_1)).to.deep.equal(BigInteger.from([0x3D, 0x65, 0xAE, 0x1C, 0x56, 0x36, 0xD7, 0x54, 0x8F, 0x47, 0x52, 0x57, 0xF9, 0xB7, 0x50, 0xA9, 0xF2]))
   })
 
   it('and', function () {

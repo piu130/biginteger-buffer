@@ -209,6 +209,30 @@ module.exports = class BigInteger {
   }
 
   /**
+   * Multiplication
+   * @param {BigInteger} bigInteger
+   * @returns {BigInteger}
+   */
+  multiply (bigInteger) {
+    if (this.isZero() || bigInteger.isZero()) return BigInteger.from([0])
+    if (this.isOne()) return bigInteger
+    if (bigInteger.isOne()) return this
+
+    const result = Buffer.alloc(this.length + bigInteger.length)
+    // TODO performance
+    for (let i = this._lastIndex; i >= 0; i--) {
+      let carry = 0
+      for (let j = bigInteger._lastIndex, k = bigInteger.length + i; j >= 0; j--, k--) {
+        const product = this.buffer[i] * bigInteger.buffer[j] + result[k] + carry
+        carry = (0xFF00 & product) >> 8
+        result[k] = product & 0xFF
+      }
+      result[i] = carry
+    }
+    return BigInteger.from(result)
+  }
+
+  /**
    * Compares two BigInteger.
    * @param {BigInteger} target
    * @returns {Number} 0 if target is the same, -1 if target is greater and 1 if target is smaller than this.

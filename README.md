@@ -65,7 +65,11 @@ Performs addition.
 
 #### `subtract(bigInteger)`
 
-Performs subtraction
+Performs subtraction.
+
+#### `multiply(bigInteger)`
+
+Performs multiplication.
 
 ### Comparison
 

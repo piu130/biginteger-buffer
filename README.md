@@ -148,6 +148,10 @@ OR operation
 
 XOR operation
 
+#### `shiftLeft(number)`
+
+Shift left operation
+
 ## Contributing
 
 Anyone can help make this project better. Please provide tests and document new features.

@@ -4,6 +4,7 @@ module.exports = class BigInteger {
   /**
    * Constructs a new BigInteger.
    * @param {Buffer} value - Buffer representation of the number.
+   * @throws {TypeError}
    */
   constructor (value) {
     if (!Buffer.isBuffer(value)) throw new TypeError('Not a Buffer')
@@ -22,7 +23,7 @@ module.exports = class BigInteger {
   /**
    * Creates a big integer.
    * @param {Array|ArrayBuffer|Buffer} value - Representation of the number.
-   * @returns {BigInteger} BigIntegerwith value of param value.
+   * @returns {BigInteger} BigInteger with value of param value.
    */
   static from (value) {
     return new BigInteger(Buffer.from(value))
@@ -164,6 +165,28 @@ module.exports = class BigInteger {
     const result = Buffer.allocUnsafe(this.length)
 
     for (let i = 0; i < result.length; i++) result[i] = ~this.buffer[i]
+    return BigInteger.from(result)
+  }
+
+  /**
+   * Shift left operation.
+   * @param {number} number - Bits to shift.
+   * @returns {BigInteger} Result.
+   */
+  shiftLeft (number) {
+    if (number < 0) throw new RangeError('Use right shift instead of left shift with negative number.')
+
+    const bits = number & 7
+    const bytes = number >> 3
+    const result = Buffer.alloc(this.length + bytes + 1)
+
+    let carry = 0
+    for (let i = this._lastIndex, j = result.length - bytes - 1; i >= 0; i--, j--) {
+      const shifted = this.buffer[i] << bits
+      result[j] = carry | shifted
+      carry = (shifted & 0xFF00) >> 8
+    }
+    result[0] = carry
     return BigInteger.from(result)
   }
 

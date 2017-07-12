@@ -2,8 +2,8 @@ const Buffer = require('buffer').Buffer
 
 module.exports = class BigInteger {
   /**
-   * Constructs a new BigInteger
-   * @param {Buffer} value
+   * Constructs a new BigInteger.
+   * @param {Buffer} value - Buffer representation of the number.
    */
   constructor (value) {
     if (!Buffer.isBuffer(value)) throw new TypeError('Not a Buffer')
@@ -11,14 +11,18 @@ module.exports = class BigInteger {
     this._trim()
   }
 
+  /**
+   * Returns the base used for BigInteger.
+   * @returns {number} Base.
+   */
   static get BASE () {
     return 256
   }
 
   /**
-   * Creates a big integer
-   * @param {Array|ArrayBuffer|Buffer} value
-   * @returns {BigInteger}
+   * Creates a big integer.
+   * @param {Array|ArrayBuffer|Buffer} value - Representation of the number.
+   * @returns {BigInteger} BigIntegerwith value of param value.
    */
   static from (value) {
     return new BigInteger(Buffer.from(value))
@@ -26,8 +30,8 @@ module.exports = class BigInteger {
 
   /**
    * Returns the biggest number in the array.
-   * @param {Array<BigInteger>} bigIntegers
-   * @returns {BigInteger}
+   * @param {Array<BigInteger>} bigIntegers - BigInteger list to search max.
+   * @returns {BigInteger} Max value in list.
    */
   static max (bigIntegers) {
     return bigIntegers.reduce((acc, curr) => curr.smaller(acc) ? acc : curr)
@@ -35,15 +39,16 @@ module.exports = class BigInteger {
 
   /**
    * Returns the smallest number in the array.
-   * @param {Array<BigInteger>} bigIntegers
-   * @returns {BigInteger}
+   * @param {Array<BigInteger>} bigIntegers - BigInteger list to search min.
+   * @returns {BigInteger} Min value in list.
    */
   static min (bigIntegers) {
     return bigIntegers.reduce((acc, curr) => curr.greater(acc) ? acc : curr)
   }
 
   /**
-   * Trims leading zeros
+   * Trims leading zeros.
+   * @returns {void} Nothing.
    * @private
    */
   _trim () {
@@ -53,16 +58,16 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Returns the length of the number (buffer length)
-   * @returns {Number}
+   * Returns the length of the number (buffer length).
+   * @returns {number} Length of the buffer.
    */
   get length () {
     return this.buffer.length
   }
 
   /**
-   * Returns the last index of the buffer (length -1)
-   * @returns {Number}
+   * Returns the last index of the buffer (length - 1).
+   * @returns {number} Last index of the buffer.
    * @private
    */
   get _lastIndex () {
@@ -70,41 +75,41 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Checks if the BigInteger is zero
-   * @returns {boolean}
+   * Checks if the BigInteger is zero.
+   * @returns {boolean} True if zero, otherwise false.
    */
   isZero () {
     return this.length === 1 && this.buffer[0] === 0
   }
 
   /**
-   * Checks if the BigInteger is one
-   * @returns {boolean}
+   * Checks if the BigInteger is one.
+   * @returns {boolean} True if one, otherwise false.
    */
   isOne () {
     return this.length === 1 && this.buffer[0] === 1
   }
 
   /**
-   * Checks if the BigInteger is even
-   * @return {boolean}
+   * Checks if the BigInteger is even.
+   * @returns {boolean} True if even, otherwise false.
    */
   isEven () {
     return this.buffer[this._lastIndex] % 2 === 0
   }
 
   /**
-   * Checks if the BigInteger is odd
-   * @return {boolean}
+   * Checks if the BigInteger is odd.
+   * @returns {boolean} True if odd, otherwise false.
    */
   isOdd () {
     return this.buffer[this._lastIndex] % 2 === 1
   }
 
   /**
-   * Bitwise and operation
-   * @param {BigInteger} bigInteger
-   * @returns {BigInteger}
+   * Bitwise and operation.
+   * @param {BigInteger} bigInteger - Operand.
+   * @returns {BigInteger} Result.
    */
   and (bigInteger) {
     let thisPos = this._lastIndex
@@ -116,9 +121,9 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Bitwise or operation
-   * @param {BigInteger} bigInteger
-   * @returns {BigInteger}
+   * Bitwise or operation.
+   * @param {BigInteger} bigInteger - Operand.
+   * @returns {BigInteger} Result.
    */
   or (bigInteger) {
     let thisPos = this._lastIndex
@@ -130,9 +135,9 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Bitwise xor operation
-   * @param {BigInteger} bigInteger
-   * @returns {BigInteger}
+   * Bitwise xor operation.
+   * @param {BigInteger} bigInteger - Operand.
+   * @returns {BigInteger} Result.
    */
   xor (bigInteger) {
     let thisPos = this._lastIndex
@@ -144,8 +149,8 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Bitwise not operation
-   * @returns {BigInteger}
+   * Bitwise not operation.
+   * @returns {BigInteger} Result.
    */
   not () {
     const result = Buffer.allocUnsafe(this.length)
@@ -155,9 +160,9 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Addition
-   * @param {BigInteger} bigInteger
-   * @returns {BigInteger}
+   * Addition.
+   * @param {BigInteger} bigInteger - Summand.
+   * @returns {BigInteger} Sum.
    */
   add (bigInteger) {
     let bigger = this
@@ -181,9 +186,9 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Subtraction
-   * @param {BigInteger} bigInteger
-   * @return {BigInteger}
+   * Subtraction.
+   * @param {BigInteger} bigInteger - Subtrahend.
+   * @returns {BigInteger} Difference.
    */
   subtract (bigInteger) {
     if (this.smaller(bigInteger)) throw new RangeError('this is smaller than bigInteger.')
@@ -209,9 +214,9 @@ module.exports = class BigInteger {
   }
 
   /**
-   * Multiplication
-   * @param {BigInteger} bigInteger
-   * @returns {BigInteger}
+   * Multiplication.
+   * @param {BigInteger} bigInteger - Multiplier.
+   * @returns {BigInteger} Product.
    */
   multiply (bigInteger) {
     if (this.isZero() || bigInteger.isZero()) return BigInteger.from([0])
@@ -232,8 +237,8 @@ module.exports = class BigInteger {
 
   /**
    * Compares two BigInteger.
-   * @param {BigInteger} target
-   * @returns {Number} 0 if target is the same, -1 if target is greater and 1 if target is smaller than this.
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {number} 0 if target is the same, -1 if target is greater and 1 if target is smaller than this.
    */
   compare (target) {
     return this.buffer.compare(target.buffer)
@@ -241,8 +246,8 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is equal to target.
-   * @param {BigInteger} target
-   * @returns {boolean}
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {boolean} True if equal, otherwise false.
    */
   equals (target) {
     return this.compare(target) === 0
@@ -250,8 +255,8 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is greater than target.
-   * @param {BigInteger} target
-   * @returns {boolean}
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {boolean} True if greater, otherwise false.
    */
   greater (target) {
     return this.compare(target) === 1
@@ -259,8 +264,8 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is greater or equal to target.
-   * @param {BigInteger} target
-   * @returns {boolean}
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {boolean} True if greater or equal, otherwise false.
    */
   greaterOrEqual (target) {
     const cmp = this.compare(target)
@@ -269,8 +274,8 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is smaller than target.
-   * @param {BigInteger} target
-   * @returns {boolean}
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {boolean} True if smaller, otherwise false.
    */
   smaller (target) {
     return this.compare(target) === -1
@@ -278,8 +283,8 @@ module.exports = class BigInteger {
 
   /**
    * Checks if this is smaller or equal to target.
-   * @param {BigInteger} target
-   * @returns {boolean}
+   * @param {BigInteger} target - Target to compare to.
+   * @returns {boolean} True if smaller or equal, otherwise false.
    */
   smallerOrEqual (target) {
     const cmp = this.compare(target)

@@ -5,8 +5,21 @@
 [![dependencies Status](https://david-dm.org/piu130/biginteger-buffer/status.svg)](https://david-dm.org/piu130/biginteger-buffer)
 [![devDependencies Status](https://david-dm.org/piu130/biginteger-buffer/dev-status.svg)](https://david-dm.org/piu130/biginteger-buffer?type=dev)
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
 Simple calculation with Buffer/Array/ArrayBuffer.
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Class methods](#class-methods)
+  * [Instance variables](#instance-variables)
+  * [Arithmetic operations](#arithmetic-operations)
+  * [Comparison](#comparison)
+  * [Bitwise operations](#bitwise-operations)
+* [Contributing](#contributing)
+
 
 ## Installation
 
@@ -131,6 +144,6 @@ OR operation
 
 XOR operation
 
-## Want to contribute?
+## Contributing
 
 Anyone can help make this project better. Please provide tests and document new features.

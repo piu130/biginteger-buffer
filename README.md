@@ -78,6 +78,10 @@ Returns the length of the number.
 
 Returns the bit length of the number.
 
+#### `msbLength`
+
+Returns the bit length of the most significant bit.
+
 ### Arithmetic operations
 
 #### `add(bigInteger)`

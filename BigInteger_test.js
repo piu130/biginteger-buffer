@@ -28,6 +28,13 @@ describe('BigInteger', function () {
     expect(BIG_NUM_2.bitLength).to.equal(63)
   })
 
+  it('msb length', function () {
+    expect(ZERO.msbLength).to.equal(1)
+    expect(ONE.msbLength).to.equal(1)
+    expect(BIG_NUM_1.msbLength).to.equal(7)
+    expect(BIG_NUM_2.msbLength).to.equal(7)
+  })
+
   it('isZero', function () {
     expect(ZERO.isZero()).to.equal(true)
     expect(ONE.isZero()).to.equal(false)

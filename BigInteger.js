@@ -85,7 +85,15 @@ module.exports = class BigInteger {
    * @returns {number} Bit length.
    */
   get bitLength () {
-    return (this._lastIndex << 3) + this.buffer[0].toString(2).length
+    return (this._lastIndex << 3) + this.msbLength
+  }
+
+  /**
+   * Returns the bit length of the most significant bit.
+   * @returns {number} Bit length of the most significant bit.
+   */
+  get msbLength () {
+    return this.buffer[0].toString(2).length
   }
 
   /**

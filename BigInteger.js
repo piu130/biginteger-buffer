@@ -333,7 +333,7 @@ module.exports = class BigInteger {
    * @returns {boolean} True if greater, otherwise false.
    */
   greater (target) {
-    return this.compare(target) === 1
+    return this.compare(target) > 0
   }
 
   /**
@@ -342,8 +342,7 @@ module.exports = class BigInteger {
    * @returns {boolean} True if greater or equal, otherwise false.
    */
   greaterOrEqual (target) {
-    const cmp = this.compare(target)
-    return cmp === 0 || cmp === 1
+    return this.compare(target) >= 0
   }
 
   /**
@@ -352,7 +351,7 @@ module.exports = class BigInteger {
    * @returns {boolean} True if smaller, otherwise false.
    */
   smaller (target) {
-    return this.compare(target) === -1
+    return this.compare(target) < 0
   }
 
   /**
@@ -361,7 +360,6 @@ module.exports = class BigInteger {
    * @returns {boolean} True if smaller or equal, otherwise false.
    */
   smallerOrEqual (target) {
-    const cmp = this.compare(target)
-    return cmp === 0 || cmp === -1
+    return this.compare(target) <= 0
   }
 }

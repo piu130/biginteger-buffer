@@ -118,7 +118,7 @@ module.exports = class BigInteger {
    * @returns {boolean} True if even, otherwise false.
    */
   isEven () {
-    return this.buffer[this._lastIndex] % 2 === 0
+    return (this.buffer[this._lastIndex] & 0x1) === 0
   }
 
   /**
@@ -126,7 +126,7 @@ module.exports = class BigInteger {
    * @returns {boolean} True if odd, otherwise false.
    */
   isOdd () {
-    return this.buffer[this._lastIndex] % 2 === 1
+    return (this.buffer[this._lastIndex] & 0x1) === 1
   }
 
   /**

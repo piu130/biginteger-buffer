@@ -37,7 +37,9 @@ const BigInteger = require('biginteger-buffer')
 
 ## Usage
 
-Every function returns a `new BigInteger` object. The big integer is `auto trimmed` (remove leading zeros) after every operation.
+The big integer is `auto trimmed` (remove leading zeros) after every operation.
+
+Some functions have an optional parameter [result]. If you use this watch the code of the function before. It could lead to unexpected behaviour sometimes if it's not zero filled before.
 
 ### Class methods
 
@@ -84,15 +86,15 @@ Returns the bit length of the most significant bit.
 
 ### Arithmetic operations
 
-#### `add(bigInteger)`
+#### `add(bigInteger, [result])`
 
 Performs addition.
 
-#### `subtract(bigInteger)`
+#### `subtract(bigInteger, [result])`
 
 Performs subtraction.
 
-#### `multiply(bigInteger)`
+#### `multiply(bigInteger, [result])`
 
 Performs multiplication.
 
@@ -140,27 +142,27 @@ Checks if this is smaller or equal to target.
 
 ### Bitwise operations
 
-#### `and(bigInteger)`
+#### `and(bigInteger, [result])`
 
 AND operation.
 
-#### `not()`
+#### `not([result])`
 
 NOT operation
 
-#### `or(bigInteger)`
+#### `or(bigInteger, [result])`
 
 OR operation
 
-#### `xor(bigInteger)`
+#### `xor(bigInteger, [result])`
 
 XOR operation
 
-#### `shiftLeft(number)`
+#### `shiftLeft(number, [result])`
 
 Shift left operation
 
-#### `shiftRight(number)`
+#### `shiftRight(number, [result])`
 
 Shift right operation
 

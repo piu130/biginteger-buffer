@@ -69,12 +69,18 @@ describe('BigInteger', function () {
     expect(ZERO.add(ONE)).to.deep.equal(ONE)
     expect(BIG_NUM_1.add(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
     expect(BIG_NUM_2.add(BIG_NUM_1)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
+    expect(BIG_NUM_2.add(BIG_NUM_1)).to.deep.equal(BigInteger.from([0x80, 0x7A, 0xCB, 0x5C, 0x38, 0xAC, 0x6D, 0xAD, 0xBF]))
   })
 
   it('subtract', function () {
     expect(ZERO.subtract(ZERO)).to.deep.equal(ZERO)
     expect(ONE.subtract(ZERO)).to.deep.equal(ONE)
     expect(BIG_NUM_1.subtract(BIG_NUM_2)).to.deep.equal(BigInteger.from([0x7F, 0x85, 0x34, 0xA3, 0xC7, 0x53, 0x92, 0x50, 0x6B]))
+
+    const tempBuff = Buffer.alloc(BIG_NUM_1.length)
+    BIG_NUM_1.buffer.copy(tempBuff)
+    const BIG_NUM_1_COPY = BigInteger.from(tempBuff)
+    expect(BIG_NUM_1_COPY.subtract(BIG_NUM_2, BIG_NUM_1_COPY.buffer)).to.deep.equal(BigInteger.from([0x7F, 0x85, 0x34, 0xA3, 0xC7, 0x53, 0x92, 0x50, 0x6B]))
   })
 
   it('multiply', function () {

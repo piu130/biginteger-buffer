@@ -27,7 +27,7 @@ module.exports = class BigInteger {
    * @returns {BigInteger} BigInteger with value of param value.
    */
   static from (value) {
-    return new BigInteger(Buffer.from(value))
+    return new BigInteger(Buffer.isBuffer(value) ? value : Buffer.from(value))
   }
 
   /**
@@ -140,12 +140,13 @@ module.exports = class BigInteger {
   /**
    * Bitwise and operation.
    * @param {BigInteger} bigInteger - Operand.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Result.
    */
-  and (bigInteger) {
+  and (bigInteger, result) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))
+    result = result || Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] & bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -154,12 +155,13 @@ module.exports = class BigInteger {
   /**
    * Bitwise or operation.
    * @param {BigInteger} bigInteger - Operand.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Result.
    */
-  or (bigInteger) {
+  or (bigInteger, result) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
+    result = result || Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] | bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -168,12 +170,13 @@ module.exports = class BigInteger {
   /**
    * Bitwise xor operation.
    * @param {BigInteger} bigInteger - Operand.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Result.
    */
-  xor (bigInteger) {
+  xor (bigInteger, result) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    const result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
+    result = result || Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] ^ bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -181,10 +184,11 @@ module.exports = class BigInteger {
 
   /**
    * Bitwise not operation.
+   * @param {Buffer} [result] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  not () {
-    const result = Buffer.allocUnsafe(this.length)
+  not (result) {
+    result = result || Buffer.allocUnsafe(this.length)
 
     for (let i = 0; i < result.length; i++) result[i] = ~this.buffer[i]
     return BigInteger.from(result)
@@ -192,15 +196,16 @@ module.exports = class BigInteger {
 
   /**
    * Shift left operation.
-   * @param {number} number - Bits to shift.
+   * @param {number} number   - Bits to shift.
+   * @param {Buffer} [result] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  shiftLeft (number) {
-    if (number < 0) this.shiftRight(-number)
+  shiftLeft (number, result) {
+    if (number < 0) return this.shiftRight(-number, result)
 
     const bits = number & 7
     const bytes = number >> 3
-    const result = Buffer.alloc(this.length + bytes + 1)
+    result = result || Buffer.alloc(this.length + bytes + 1)
 
     let carry = 0
     for (let i = this._lastIndex, j = result.length - bytes - 1; i >= 0; i--, j--) {
@@ -214,15 +219,16 @@ module.exports = class BigInteger {
 
   /**
    * Shift right operation.
-   * @param {number} number - Bits to shift.
+   * @param {number} number   - Bits to shift.
+   * @param {Buffer} [result] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  shiftRight (number) {
-    if (number < 0) return this.shiftLeft(-number)
+  shiftRight (number, result) {
+    if (number < 0) return this.shiftLeft(-number, result)
 
     const bits = number & 7
     const bytes = number >> 3
-    const result = Buffer.alloc(this.length - bytes)
+    result = result || Buffer.alloc(this.length - bytes)
 
     let carry = 0
     for (let i = 0, j = 0; i < this.length; i++, j++) {
@@ -236,16 +242,17 @@ module.exports = class BigInteger {
   /**
    * Addition.
    * @param {BigInteger} bigInteger - Summand.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Sum.
    */
-  add (bigInteger) {
+  add (bigInteger, result) {
     let bigger = this
     let smaller = bigInteger
     if (this.compare(bigInteger) < 0) {
       bigger = bigInteger
       smaller = this
     }
-    const result = Buffer.alloc(bigger.length + 1)
+    result = result || Buffer.alloc(bigger.length + 1)
 
     let biggerPos = bigger._lastIndex
     let smallerPos = smaller._lastIndex
@@ -262,12 +269,13 @@ module.exports = class BigInteger {
   /**
    * Subtraction.
    * @param {BigInteger} bigInteger - Subtrahend.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Difference.
    */
-  subtract (bigInteger) {
+  subtract (bigInteger, result) {
     if (this.smaller(bigInteger)) throw new RangeError('this is smaller than bigInteger.')
 
-    const result = Buffer.alloc(this.length)
+    result = result || Buffer.alloc(this.length)
 
     let biggerPos = this._lastIndex
     let smallerPos = bigInteger._lastIndex
@@ -290,13 +298,14 @@ module.exports = class BigInteger {
   /**
    * Multiplication.
    * @param {BigInteger} bigInteger - Multiplier.
+   * @param {Buffer}     [result]   - Result buffer.
    * @returns {BigInteger} Product.
    */
-  multiply (bigInteger) {
-    if (this.isZero() || bigInteger.isZero()) return BigInteger.from([0])
+  multiply (bigInteger, result) {
+    result = result || Buffer.alloc(this.length + bigInteger.length)
 
-    const result = Buffer.alloc(this.length + bigInteger.length)
-    // TODO performance
+    if (this.isZero() || bigInteger.isZero()) return BigInteger.from(result.fill(0))
+    // TODO performance - choose better algorithm
     for (let i = this._lastIndex; i >= 0; i--) {
       let carry = 0
       for (let j = bigInteger._lastIndex, k = bigInteger.length + i; j >= 0; j--, k--) {

@@ -140,13 +140,12 @@ module.exports = class BigInteger {
   /**
    * Bitwise and operation.
    * @param {BigInteger} bigInteger - Operand.
-   * @param {Buffer}     [result]   - Result buffer.
+   * @param {Buffer} [result=Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  and (bigInteger, result) {
+  and (bigInteger, result = Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    result = result || Buffer.allocUnsafe(Math.min(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] & bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -155,13 +154,12 @@ module.exports = class BigInteger {
   /**
    * Bitwise or operation.
    * @param {BigInteger} bigInteger - Operand.
-   * @param {Buffer}     [result]   - Result buffer.
+   * @param {Buffer} [result=Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  or (bigInteger, result) {
+  or (bigInteger, result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    result = result || Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] | bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -170,13 +168,12 @@ module.exports = class BigInteger {
   /**
    * Bitwise xor operation.
    * @param {BigInteger} bigInteger - Operand.
-   * @param {Buffer}     [result]   - Result buffer.
+   * @param {Buffer} [result=Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  xor (bigInteger, result) {
+  xor (bigInteger, result = Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))) {
     let thisPos = this._lastIndex
     let bigIntegerPos = bigInteger._lastIndex
-    result = result || Buffer.allocUnsafe(Math.max(this.length, bigInteger.length))
 
     for (let i = result.length - 1; i >= 0; i--) result[i] = this.buffer[thisPos--] ^ bigInteger.buffer[bigIntegerPos--]
     return BigInteger.from(result)
@@ -184,12 +181,10 @@ module.exports = class BigInteger {
 
   /**
    * Bitwise not operation.
-   * @param {Buffer} [result] - Result buffer.
+   * @param {Buffer} [result=Buffer.allocUnsafe(this.length)] - Result buffer.
    * @returns {BigInteger} Result.
    */
-  not (result) {
-    result = result || Buffer.allocUnsafe(this.length)
-
+  not (result = Buffer.allocUnsafe(this.length)) {
     for (let i = 0; i < result.length; i++) result[i] = ~this.buffer[i]
     return BigInteger.from(result)
   }
@@ -269,13 +264,11 @@ module.exports = class BigInteger {
   /**
    * Subtraction.
    * @param {BigInteger} bigInteger - Subtrahend.
-   * @param {Buffer}     [result]   - Result buffer.
+   * @param {Buffer} [result=Buffer.alloc(this.length)] - Result buffer.
    * @returns {BigInteger} Difference.
    */
-  subtract (bigInteger, result) {
+  subtract (bigInteger, result = Buffer.alloc(this.length)) {
     if (this.smaller(bigInteger)) throw new RangeError('this is smaller than bigInteger.')
-
-    result = result || Buffer.alloc(this.length)
 
     let biggerPos = this._lastIndex
     let smallerPos = bigInteger._lastIndex
@@ -298,12 +291,10 @@ module.exports = class BigInteger {
   /**
    * Multiplication.
    * @param {BigInteger} bigInteger - Multiplier.
-   * @param {Buffer}     [result]   - Result buffer.
+   * @param {Buffer}     [result=Buffer.alloc(this.length + bigInteger.length)]   - Result buffer.
    * @returns {BigInteger} Product.
    */
-  multiply (bigInteger, result) {
-    result = result || Buffer.alloc(this.length + bigInteger.length)
-
+  multiply (bigInteger, result = Buffer.alloc(this.length + bigInteger.length)) {
     if (this.isZero() || bigInteger.isZero()) return BigInteger.from(result.fill(0))
     // TODO performance - choose better algorithm
     for (let i = this._lastIndex; i >= 0; i--) {

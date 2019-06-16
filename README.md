@@ -1,4 +1,4 @@
-# biginteger-buffer [WIP]
+# [Archived] biginteger-buffer
 
 [![Build Status](https://travis-ci.org/piu130/biginteger-buffer.svg?branch=master)](https://travis-ci.org/piu130/biginteger-buffer)
 [![codecov](https://codecov.io/gh/piu130/biginteger-buffer/branch/master/graph/badge.svg)](https://codecov.io/gh/piu130/biginteger-buffer)
